@@ -5,6 +5,7 @@ function Ticket(props){
   const ticketInformation =
     <div>
       <h3>{props.location} - {props.names}</h3>
+      {/* <p>{props.issue}</p> */}
       <h4>{props.formattedWaitTime}</h4>
       <hr/>
     </div>;

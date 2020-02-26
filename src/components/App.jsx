@@ -1,9 +1,11 @@
 import React from 'react';
 import Header from './Header';
 import TicketList from './TicketList';
+import PropTypes from 'prop-types';
 import NewTicketControl from './NewTicketControl';
 import Error404 from './Error404';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Moment from 'moment';
 import Admin from './Admin';
 import { v4 } from 'uuid';
@@ -12,6 +14,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
       masterTicketList: {},
       selectedTicket: null
@@ -58,17 +61,26 @@ class App extends React.Component {
       <div>
         <Header/>
         <Switch>
-          <Route exact path='/' render={()=><TicketList ticketList={this.state.masterTicketList} />} />
+          <Route exact path='/' render={()=><TicketList ticketList={this.props.masterTicketList} />} />
           <Route path='/newticket' render={()=><NewTicketControl onNewTicketCreation={this.handleAddingNewTicketToList} />} />
-          <Route path='/admin' render={(props)=><Admin ticketList={this.state.masterTicketList} currentRouterPath={props.location.pathname}
+          <Route path='/admin' render={(props)=><Admin ticketList={this.props.masterTicketList}     currentRouterPath={props.location.pathname}
             onTicketSelection={this.handleChangingSelectedTicket}
-            selectedTicket={this.state.selectedTicket}/>} />
+            selectedTicket={this.props.selectedTicket}/>} />
           <Route component={Error404} />
         </Switch>
       </div>
     );
   }
-
 }
 
-export default App;
+App.propTypes = {
+  masterTicketList: PropTypes.object
+};
+
+const mapStateToProps = state => {
+  return {
+    masterTicketList: state
+  }
+}
+
+export default connect(mapStateToProps)(App);
