@@ -21,7 +21,7 @@
   "homepage": "https://github.com/epicodus-lessons/react-help-queue-example#readme",
   "dependencies": {
     "moment": "^2.24.0",
-    "npm": "^6.13.7",
+    "npm": "^6.14.6",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
